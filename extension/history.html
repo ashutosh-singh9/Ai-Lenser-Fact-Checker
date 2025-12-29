@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI LENSER - History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --primary: #0891b2;
+            --primary-light: #22d3ee;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border-color: rgba(34, 211, 238, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #0891b2, #22d3ee);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            background: linear-gradient(135deg, #0891b2, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .clear-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--danger);
+            border-radius: 8px;
+            color: var(--danger);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .clear-btn:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        .history-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .history-item {
+            padding: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            transition: all 0.2s;
+        }
+
+        .history-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .history-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .history-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .history-badge.real {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        .history-badge.fake {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        .history-score {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0891b2, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .history-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .history-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                        <circle cx="12" cy="12" r="4" fill="currentColor" />
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>AI LENSER</h1>
+                    <p>Analysis History</p>
+                </div>
+            </div>
+            <button class="clear-btn" id="clearBtn">Clear History</button>
+        </header>
+
+        <div class="history-grid" id="historyGrid">
+            <div class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                <p>No history yet</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadHistory);
+        document.getElementById('clearBtn').addEventListener('click', clearHistory);
+
+        function loadHistory() {
+            chrome.storage.local.get(['ailenser_history'], (result) => {
+                const history = result.ailenser_history || [];
+                renderHistory(history);
+            });
+        }
+
+        function renderHistory(history) {
+            const grid = document.getElementById('historyGrid');
+
+            if (history.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <p>No history yet</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = history.map(item => `
+                <div class="history-item">
+                    <div class="history-header">
+                        <span class="history-badge ${item.result.prediction.toLowerCase()}">${item.result.prediction}</span>
+                        <span class="history-score">${item.result.trust_score}%</span>
+                    </div>
+                    <div class="history-text">${item.text}</div>
+                    <div class="history-meta">${item.timestamp}</div>
+                </div>
+            `).join('');
+        }
+
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear all history?')) {
+                chrome.storage.local.remove(['ailenser_history'], () => {
+                    loadHistory();
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

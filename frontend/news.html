@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI LENSER - Latest Fact-Checked News Headlines from India and around the world">
+    <title>Latest Headlines - AI LENSER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Port+Lligat+Sans&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="news.css">
+</head>
+
+<body class="dark-mode">
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-btn" id="menuBtn" onclick="window.location.href='index.html'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <h1 class="page-title">Latest Headlines</h1>
+        </div>
+
+        <div class="header-right">
+            <div class="search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                </svg>
+                <input type="text" placeholder="Search news..." id="searchInput">
+            </div>
+            <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5" />
+                    <path
+                        d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Category Filters -->
+    <section class="filters">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="verified">
+            <span class="status-dot verified"></span>
+            Verified
+        </button>
+        <button class="filter-btn" data-category="fake">
+            <span class="status-dot fake"></span>
+            Debunked
+        </button>
+        <button class="filter-btn" data-category="politics">Politics</button>
+        <button class="filter-btn" data-category="technology">Technology</button>
+        <button class="filter-btn" data-category="health">Health</button>
+        <button class="filter-btn" data-category="world">World</button>
+    </section>
+
+    <!-- News Grid -->
+    <main class="news-container">
+        <div class="news-grid" id="newsGrid">
+            <!-- News cards will be populated by JavaScript -->
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-state" id="loadingState">
+            <div class="loader"></div>
+            <p>Loading latest headlines...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V9a2 2 0 012-2h2a2 2 0 012 2v9a2 2 0 01-2 2h-2z" />
+            </svg>
+            <p>No news found</p>
+        </div>
+    </main>
+
+    <script src="news.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI LENSER - Your Fact Check History">
+    <title>History - AI LENSER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Port+Lligat+Sans&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="history.css">
+</head>
+
+<body class="dark-mode">
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-btn" onclick="window.location.href='index.html'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <h1 class="page-title">Fact Check History</h1>
+        </div>
+
+        <div class="header-right">
+            <button class="clear-all-btn" id="clearAllBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+                </svg>
+                Clear All
+            </button>
+            <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5" />
+                    <path
+                        d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Stats Summary -->
+    <section class="stats-summary">
+        <div class="stat-box">
+            <span class="stat-number" id="totalChecks">0</span>
+            <span class="stat-label">Total Checks</span>
+        </div>
+        <div class="stat-box verified">
+            <span class="stat-number" id="verifiedCount">0</span>
+            <span class="stat-label">Verified</span>
+        </div>
+        <div class="stat-box fake">
+            <span class="stat-number" id="fakeCount">0</span>
+            <span class="stat-label">Debunked</span>
+        </div>
+    </section>
+
+    <!-- History List -->
+    <main class="history-container">
+        <div class="history-list" id="historyList">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+            </svg>
+            <h3>No History Yet</h3>
+            <p>Your fact checks will appear here</p>
+            <a href="index.html" class="start-btn">Start Checking</a>
+        </div>
+    </main>
+
+    <script src="history.js"></script>
+</body>
+
+</html>

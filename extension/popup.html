@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI LENSER</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Port+Lligat+Sans&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <div class="popup-container">
+        <!-- Header -->
+        <header class="popup-header">
+            <span class="logo-text">AI LENSER</span>
+            <button class="open-website" id="openWebsite" title="Open Full Website">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+            </button>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="popup-nav">
+            <button class="nav-btn active" data-tab="check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                </svg>
+                Check
+            </button>
+            <button class="nav-btn" data-tab="scan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" />
+                    <circle cx="12" cy="13" r="4" />
+                </svg>
+                Scan
+            </button>
+            <button class="nav-btn" data-tab="history">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                History
+            </button>
+        </nav>
+
+        <!-- Check Tab -->
+        <div class="tab-content active" id="checkTab">
+            <div class="input-group">
+                <textarea id="textInput" placeholder="Paste news text or headline to verify..." rows="4"></textarea>
+                <button class="verify-btn" id="verifyBtn">
+                    <span class="btn-text">Verify</span>
+                    <span class="btn-loader">
+                        <svg class="spinner" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke-width="3" fill="none" />
+                        </svg>
+                    </span>
+                </button>
+            </div>
+
+            <!-- Result Display -->
+            <div class="result-container" id="resultContainer">
+                <div class="result-header">
+                    <span class="result-badge" id="resultBadge">-</span>
+                    <span class="result-score" id="resultScore">0%</span>
+                </div>
+                <div class="trust-bar">
+                    <div class="trust-fill" id="trustFill"></div>
+                </div>
+                <p class="result-details" id="resultDetails">Enter text and click Verify to analyze</p>
+            </div>
+        </div>
+
+        <!-- Scan Tab -->
+        <div class="tab-content" id="scanTab">
+            <div class="scan-options">
+                <button class="scan-option" id="scanPageBtn">
+                    <div class="option-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+                        </svg>
+                    </div>
+                    <div class="option-info">
+                        <span>Scan Page</span>
+                        <small>Analyze current page content</small>
+                    </div>
+                </button>
+
+                <button class="scan-option" id="snippetBtn">
+                    <div class="option-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M3 9h18M9 21V9" />
+                        </svg>
+                    </div>
+                    <div class="option-info">
+                        <span>Screenshot Snippet</span>
+                        <small>Select area to capture & analyze</small>
+                    </div>
+                </button>
+
+                <button class="scan-option" id="selectTextBtn">
+                    <div class="option-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 7V4h16v3M9 20h6M12 4v16" />
+                        </svg>
+                    </div>
+                    <div class="option-info">
+                        <span>Select Text</span>
+                        <small>Highlight text on page to analyze</small>
+                    </div>
+                </button>
+            </div>
+
+            <div class="scan-status" id="scanStatus">
+                <div class="status-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                        <path d="M22 4L12 14.01l-3-3" />
+                    </svg>
+                </div>
+                <p>Ready to scan</p>
+            </div>
+        </div>
+
+        <!-- History Tab -->
+        <div class="tab-content" id="historyTab">
+            <div class="history-list" id="historyList">
+                <div class="empty-history">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                    </svg>
+                    <p>No history yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
